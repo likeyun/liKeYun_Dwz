@@ -2,7 +2,26 @@
 这是一套开源、免费、自建的短链接生成程序，可以通过本套程序快速自建属于自己的短链接生成平台，有丰富的功能和便捷的API，可以帮助你进行各项推广任务！
 
 # 安装
-只需要访问install目录即可进入安装流程，简单输入数据库信息、管理员信息即可快速安装，请在php5.6 - 7.4版本内安装。
+只需要访问install目录即可进入安装流程，简单输入数据库信息、管理员信息即可快速安装，请在php5.6 - 7.4版本内安装。<br/>
+
+如果你的是Nginx服务器，那么你还需要配置伪静态规则<br/><br/>
+Nginx伪静态规则<br/>
+```
+location / {
+  if (!-e $request_filename) {
+    rewrite ^/(.*)$ /index.php?id=$1 last;
+  }
+}
+```
+<br/>
+Apache伪静态请在短网址系统index.php的同一目录建一个文件名为.htaccess的伪静态文件<br/><br/>
+Apache伪静态规则<br/><br/>
+
+```
+RewriteEngine On
+#RewriteBase / 
+RewriteRule ^(\w+)$ index.php?id=$1
+```
 
 # 框架/语言
 前端框架：Bootstrap+jQuery<br/>
