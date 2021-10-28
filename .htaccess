@@ -1,1 +1,3 @@
-www
+RewriteEngine On
+#RewriteBase / 
+RewriteRule ^(\w+)$ index.php?id=$1
