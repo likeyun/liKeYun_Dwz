@@ -45,7 +45,13 @@ RewriteRule ^(\w+)$ index.php?id=$1
 （10）可查看总访问量、昨天访问量、今天访问量、本月访问量、API请求次数、短链接总数等数据<br/>
 
 # 截图
-
+<img src="https://github.com/likeyun/TANKING/blob/master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211028154215.png" /><br/>
+<img src="https://github.com/likeyun/TANKING/blob/master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211028154227.png" /><br/>
+<img src="https://github.com/likeyun/TANKING/blob/master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211028154259.png" /><br/>
+<img src="https://github.com/likeyun/TANKING/blob/master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211028154314.png" /><br/>
+<img src="https://github.com/likeyun/TANKING/blob/master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211028154322.png" /><br/>
+<img src="https://github.com/likeyun/TANKING/blob/master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211028154333.png" /><br/>
+<img src="https://github.com/likeyun/TANKING/blob/master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211028154340.png" /><br/>
 
 # 支持与赞赏
 如果您喜欢我的作品，想要支持我，请微信扫码<br/><br/>
