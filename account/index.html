@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>登录 - liKeYun短链接生成开源程序2.0 - https://segmentfault.com/u/tanking</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<script src="../js/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+	<link rel="shortcut icon" href="../images/fvicon.png" type="image/x-icon"/>
+</head>
+<body>
+	<div id="login_div">
+		<h3>登录管理后台</h3>
+		<div class="form_div">
+			<form onsubmit="return false" id="logincheck">
+				<input type="text"  class="inputstyle" name="user" placeholder="请输入管理员账号"><br/>
+				<input type="password"  class="inputstyle" name="pwd" placeholder="请输入管理员密码"><br/>
+				<button type="button" class="btnstyle" onclick="logincheck();">立即登陆</button>
+				<a href="javascript:alert('打开dbconfig/db.php进行修改密码')" class="fpwd">找回密码</a>
+			</form>
+		</div>
+		<span class="result"></span>
+	</div>
+
+	<script type="text/javascript">
+		// 延迟关闭信息提示框
+		function closesctips(){
+		  $("#login_div .result").css('display','none');
+		}
+
+		function logincheck(){
+		  $.ajax({
+		      type: "POST",
+		      url: "./logincheck.php",
+		      data: $('#logincheck').serialize(),
+		      success: function (data) {
+		        if (data.code == 100) {
+		        	$("#login_div .result").css("display","block");
+		        	$("#login_div .result").html("<p>登录成功</p>");
+		        	location.href="../index/"
+		        }else{
+		        	$("#login_div .result").css("display","block");
+		        	$("#login_div .result").html("<p style='color:#f00;'>"+data.msg+"</p>");
+		        }
+		      },
+		      error : function() {
+		        alert("登录失败，服务器发生错误")
+		      }
+		  });
+		  setTimeout('closesctips()', 2000);
+		}
+	</script>
+</body>
+</html>
