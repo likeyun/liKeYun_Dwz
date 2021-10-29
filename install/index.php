@@ -51,10 +51,10 @@ $phpv = PHP_VERSION; // php版本检测
 	        <td>PHP版本</td>
 	        <td>php5.5 - 7.4版本</td>
 	        <?php
-	          if ($phpv >= '5.5' && $phpv <= '7.4') {
+	          if ($phpv >= '5.5' && $phpv <= '7.6') {
 	            echo '<td><span class="badge badge-success">符合</span></td>';
 	          }else{
-	            echo '<td><span class="badge badge-danger">不符合</span></td>';
+	            echo '<td><span class="badge badge-danger">不符合</span> 当前:'.$phpv.'</td>';
 	          }
 	        ?>
 	      </tr>
@@ -112,7 +112,7 @@ $phpv = PHP_VERSION; // php版本检测
 
 		<!-- 安装按钮 -->
 		<?php
-		  if ($phpv >= '5.5' && $phpv <= '7.4') {
+		  if ($phpv >= '5.5' && $phpv <= '7.6') {
 		    echo '<div class="btn_view"><button type="button" class="btn btn-dark" style="background:#3464e0;border:none;margin:20px auto 0;display: block;" onclick="checkinstall();">开始安装</button></div>';
 		  }
 		?>

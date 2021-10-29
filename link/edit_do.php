@@ -38,6 +38,31 @@ if(isset($_SESSION["lkydwz.admin"])){
 	}else{
 		$dwz_yxq = sqlfzr(trim($_POST["dwz_yxq"]));
 	}
+	
+    // 如果选择了防封模式，需要验证是否已经配置防封域名
+	if ($dwz_reditype == '2') {
+		$sql_ffym = "SELECT * FROM dwz_ym WHERE ym_type = '2'";
+		$res_ffym = $conn->query($sql_ffym);
+		if ($res_ffym->num_rows == '0') {
+			$result = array(
+				"code" => "107",
+				"msg" => "未设置防封域名"
+			);
+			echo json_encode($result,JSON_UNESCAPED_UNICODE);
+			exit;
+		}
+	}
+	
+	// 获取防封域名
+	if ($dwz_reditype == '2') {
+		$sql_ffym = "SELECT * FROM dwz_ym WHERE ym_type = '2'";
+		$res_ffym = $conn->query($sql_ffym);
+		if ($res_ffym->num_rows > 0) {
+			while($row_ffym = $res_ffym->fetch_assoc()) {
+				$dwz_ffym = $row_ffym["ym"];
+			}
+		}
+	}
 
 	if(empty($dwz_title)){
 		$result = array(
@@ -60,7 +85,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 		mysqli_query($conn, "SET NAMES UTF-8");
 
 		// 更新数据库
-		mysqli_query($conn,"UPDATE dwz_list SET dwz_title='$dwz_title',dwz_url='$dwz_url',dwz_type='$dwz_type',dwz_reditype='$dwz_reditype',dwz_yxq='$dwz_yxq',dwz_status='$dwz_status' WHERE dwz_id=".$dwz_id);
+		mysqli_query($conn,"UPDATE dwz_list SET dwz_title='$dwz_title',dwz_url='$dwz_url',dwz_type='$dwz_type',dwz_reditype='$dwz_reditype',dwz_yxq='$dwz_yxq',dwz_status='$dwz_status',dwz_ffym='$dwz_ffym' WHERE dwz_id=".$dwz_id);
 
 		$result = array(
 			"code" => "100",

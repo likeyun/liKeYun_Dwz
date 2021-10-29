@@ -24,9 +24,15 @@ if(isset($_SESSION["lkydwz.admin"])){
 
 	// 获取有效期的参数
 	if ($_REQUEST["dwz_yxq"] == 'cus') {
+		date_default_timezone_set("Asia/Shanghai");
 		$dwz_yxq = sqlfzr(trim($_REQUEST["dwz_zdyyxq"]));
-	}else{
+		$dwz_yxq_date = date('Y-m-d',strtotime("+".$dwz_yxq." day"));
+	}else if($_REQUEST["dwz_yxq"] !== 'cus' && $_REQUEST["dwz_yxq"] !== 'ever') {
+		date_default_timezone_set("Asia/Shanghai");
 		$dwz_yxq = sqlfzr(trim($_REQUEST["dwz_yxq"]));
+		$dwz_yxq_date = date('Y-m-d',strtotime("+".$dwz_yxq." day"));
+	}else{
+		$dwz_yxq_date = 'ever';
 	}
 
 	// 创建短网址id和Key
@@ -155,8 +161,6 @@ if(isset($_SESSION["lkydwz.admin"])){
 				$dwz_ffym = $row_ffym["ym"];
 			}
 		}
-	}else{
-		$dwz_ffym = '';
 	}
 
 	// 验证表单
@@ -165,7 +169,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 			"code" => "101",
 			"msg" => "标题不得为空"
 		);
-	}else if(empty($dwz_yxq)){
+	}else if(empty($dwz_yxq_date)){
 		$result = array(
 			"code" => "102",
 			"msg" => "请输入有效期"
@@ -178,7 +182,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 	}else{
 		
 		// 插入数据库
-		$sql_creat_dwz = "INSERT INTO dwz_list (dwz_id,dwz_key,dwz_url,dwz_title,dwz_type,dwz_yxq,dwz_reditype,dwz_rkym,dwz_ffym) VALUES ('$dwz_id','$dwz_key','$dwz_url','$dwz_title','$dwz_type','$dwz_yxq','$dwz_reditype','$dwz_rkym','$dwz_ffym')";
+		$sql_creat_dwz = "INSERT INTO dwz_list (dwz_id,dwz_key,dwz_url,dwz_title,dwz_type,dwz_yxq,dwz_reditype,dwz_rkym,dwz_ffym) VALUES ('$dwz_id','$dwz_key','$dwz_url','$dwz_title','$dwz_type','$dwz_yxq_date','$dwz_reditype','$dwz_rkym','$dwz_ffym')";
 
 		// 判断创建结果
 		if ($conn->query($sql_creat_dwz) === TRUE) {

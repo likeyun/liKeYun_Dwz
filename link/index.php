@@ -115,7 +115,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 						<div class="title">标题</div>
 						<div class="link">链接</div>
 						<div class="date">时间</div>
-						<div class="status">时限</div>
+						<div class="date">到期</div>
 						<div class="status">状态</div>
 						<div class="status">类型</div>
 						<div class="pv">访问</div>
@@ -154,7 +154,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 						if ($dwz_yxq == 'ever') {
 							$dwz_yxq = '永久';
 						}else{
-							$dwz_yxq = $dwz_yxq.'天';
+							$dwz_yxq = $dwz_yxq;
 						}
 
 						// 遍历字段
@@ -162,7 +162,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 							<div class="title">'.$dwz_title.'</div>
 							<div class="link">'.$dwz_rkym.'/'.$dwz_key.'</div>
 							<div class="date">'.$dwz_creat_time.'</div>
-							<div class="status">'.$dwz_yxq.'</div>
+							<div class="date">'.$dwz_yxq.'</div>
 							<div class="status">'.$dwz_status.'</div>
 							<div class="status">'.$dwz_reditype.'</div>
 							<div class="pv">'.$dwz_pv.'</div>
@@ -207,7 +207,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 						<div class="title">标题</div>
 						<div class="link">链接</div>
 						<div class="date">时间</div>
-						<div class="status">时限</div>
+						<div class="status">到期</div>
 						<div class="status">状态</div>
 						<div class="status">类型</div>
 						<div class="pv">访问</div>
