@@ -33,10 +33,18 @@ if(isset($_SESSION["lkydwz.admin"])){
 	$dwz_reditype = sqlfzr(trim($_POST["dwz_reditype"]));
 	$dwz_yxq = sqlfzr(trim($_POST["dwz_yxq"]));
 	$dwz_status = sqlfzr(trim($_POST["dwz_status"]));
-	if ($_POST["dwz_yxq"] == 'cus') {
-		$dwz_yxq = sqlfzr(trim($_POST["dwz_zdyyxq"]));
+	
+	// 获取有效期
+	if ($_REQUEST["dwz_yxq"] == 'cus') {
+		date_default_timezone_set("Asia/Shanghai");
+		$dwz_yxq = sqlfzr(trim($_REQUEST["dwz_zdyyxq"]));
+		$dwz_yxq_date = date('Y-m-d',strtotime("+".$dwz_yxq." day"));
+	}else if($_REQUEST["dwz_yxq"] !== 'cus' && $_REQUEST["dwz_yxq"] !== 'ever') {
+		date_default_timezone_set("Asia/Shanghai");
+		$dwz_yxq = sqlfzr(trim($_REQUEST["dwz_yxq"]));
+		$dwz_yxq_date = date('Y-m-d',strtotime("+".$dwz_yxq." day"));
 	}else{
-		$dwz_yxq = sqlfzr(trim($_POST["dwz_yxq"]));
+		$dwz_yxq_date = 'ever';
 	}
 	
     // 如果选择了防封模式，需要验证是否已经配置防封域名
@@ -85,7 +93,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 		mysqli_query($conn, "SET NAMES UTF-8");
 
 		// 更新数据库
-		mysqli_query($conn,"UPDATE dwz_list SET dwz_title='$dwz_title',dwz_url='$dwz_url',dwz_type='$dwz_type',dwz_reditype='$dwz_reditype',dwz_yxq='$dwz_yxq',dwz_status='$dwz_status',dwz_ffym='$dwz_ffym' WHERE dwz_id=".$dwz_id);
+		mysqli_query($conn,"UPDATE dwz_list SET dwz_title='$dwz_title',dwz_url='$dwz_url',dwz_type='$dwz_type',dwz_reditype='$dwz_reditype',dwz_yxq='$dwz_yxq_date',dwz_status='$dwz_status',dwz_ffym='$dwz_ffym' WHERE dwz_id=".$dwz_id);
 
 		$result = array(
 			"code" => "100",
