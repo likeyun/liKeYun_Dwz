@@ -129,7 +129,14 @@ if (trim(empty($key))) {
 					}
 	        	}else if($dwz_type == '3') {
 	        		if(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') === false) {
-	        			echo '<title>正在跳转</title>';
+					$agent_pc = strtolower($_SERVER['HTTP_USER_AGENT']);
+					$is_pc = (strpos($agent_pc, 'windows nt')) ? true : false;
+					if($is_pc){
+						echo '<title>温馨提示</title>';
+						echo "<br/><br/><br/><br/><br/><img src='./images/warning.png' style='width:120px;height:120px;display:block;margin:20px auto;' /><p style='text-align:center;color:#666;'>该页面只能在手机浏览器打开</p>";
+						exit;
+					}
+						echo '<title>正在跳转</title>';
 						echo '<script>location.href="'.$dwz_url.'";</script>';
 					}else{
 						echo '<title>温馨提示</title>';
