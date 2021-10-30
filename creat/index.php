@@ -188,7 +188,8 @@ if(isset($_SESSION["lkydwz.admin"])){
 		if ($conn->query($sql_creat_dwz) === TRUE) {
 			$result = array(
 				"code" => "100",
-				"msg" => "创建成功"
+				"msg" => "创建成功",
+				"url" => $dwz_rkym.'/'.$dwz_key
 			);
 
 			// 更新请求次数
