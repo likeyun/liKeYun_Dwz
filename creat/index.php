@@ -20,7 +20,6 @@ if(isset($_SESSION["lkydwz.admin"])){
 	$dwz_type = sqlfzr(trim($_REQUEST["dwz_type"]));
 	$dwz_keynum = sqlfzr(trim($_REQUEST["dwz_keynum"]));
 	$dwz_url = trim($_REQUEST["dwz_url"]);
-	$api_key = sqlfzr(trim($_REQUEST["api_key"]));
 
 	// 获取有效期的参数
 	if ($_REQUEST["dwz_yxq"] == 'cus') {
@@ -38,84 +37,6 @@ if(isset($_SESSION["lkydwz.admin"])){
 	// 创建短网址id和Key
 	$dwz_id = rand(10000,99999);
 	$dwz_key = CreatKey($dwz_keynum);
-
-	// 验证apiKey是否为空
-	if ($api_key == '' || empty($api_key) || !isset($api_key) || $api_key == null) {
-		$result = array(
-			"code" => "108",
-			"msg" => "ApiKey参数为空"
-		);
-		echo json_encode($result,JSON_UNESCAPED_UNICODE);
-		exit;
-	}
-
-	// 验证apiKey授权状态
-	$sql_apikey = "SELECT * FROM dwz_api WHERE api_key = '$api_key'";
-	$res_apikey = $conn->query($sql_apikey);
-	if ($res_apikey->num_rows == '0' && $api_key !== 'local') {
-		$result = array(
-			"code" => "105",
-			"msg" => "ApiKey未授权"
-		);
-		echo json_encode($result,JSON_UNESCAPED_UNICODE);
-		exit;
-	}
-
-	// 验证apiKey启用状态
-	$sql_apikey_status = "SELECT * FROM dwz_api WHERE api_key = '$api_key'";
-	$res_apikey_status = $conn->query($sql_apikey_status);
-	if ($res_apikey_status->num_rows > 0 && $api_key !== 'local') {
-		while($row_apikey_status = $res_apikey_status->fetch_assoc()) {
-			$api_status = $row_apikey_status['api_status'];
-		}
-		if ($api_status !== '1') {
-			$result = array(
-				"code" => "104",
-				"msg" => "ApiKey已被停用"
-			);
-			echo json_encode($result,JSON_UNESCAPED_UNICODE);
-			exit;
-		}
-	}
-
-	// 验证apiKey有效期
-	$sql_apikey_yxq = "SELECT * FROM dwz_api WHERE api_key = '$api_key'";
-	$res_apikey_yxq = $conn->query($sql_apikey_yxq);
-	if ($res_apikey_yxq->num_rows > 0 && $api_key !== 'local') {
-		while($row_apikey_yxq = $res_apikey_yxq->fetch_assoc()) {
-			$api_yxq = $row_apikey_yxq['api_yxq'];
-		}
-		date_default_timezone_set("Asia/Shanghai");
-		$thisdate = date("Y-m-d");
-		if (strtotime($thisdate)>strtotime($api_yxq) && !empty($api_yxq)) {
-			$result = array(
-				"code" => "112",
-				"msg" => "你的ApiKey已过期"
-			);
-			echo json_encode($result,JSON_UNESCAPED_UNICODE);
-			exit;
-		}
-	}
-
-	// 验证白名单ip
-	$sql_apikey_ip = "SELECT * FROM dwz_api WHERE api_key = '$api_key'";
-	$res_apikey_ip = $conn->query($sql_apikey_ip);
-	if ($res_apikey_ip->num_rows > 0) {
-		while($row_apikey_ip = $res_apikey_ip->fetch_assoc()) {
-			$api_ip = $row_apikey_ip['api_ip'];
-			if ($api_ip == '' || $api_ip == null || empty($api_ip) || !isset($api_ip)) {
-				$api_ip = "不限";
-			}
-		}
-		if(get_server_ip() !== $api_ip && $api_ip !== "不限"){
-			$result = array(
-				"code" => "104",
-				"msg" => "服务器IP不在白名单中"
-			);
-			echo json_encode($result,JSON_UNESCAPED_UNICODE);
-			exit;
-		}
-	}
 
 	// 验证入口域名
 	$sql_rkym = "SELECT * FROM dwz_ym WHERE ym_type = '1'";
@@ -191,12 +112,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 				"msg" => "创建成功",
 				"url" => $dwz_rkym.'/'.$dwz_key
 			);
-
-			// 更新请求次数
-			if ($api_key !== 'local') {
-				mysqli_query($conn,"UPDATE dwz_tongji SET dwz_api_qq_num=dwz_api_qq_num+1");
-			}
-
+			
 		}else{
 			$result = array(
 				"code" => "105",
@@ -215,20 +131,6 @@ if(isset($_SESSION["lkydwz.admin"])){
 	);
 	echo json_encode($result,JSON_UNESCAPED_UNICODE);
 	exit;
-}
-
-// 获取当前服务器的ip
-function get_server_ip() { 
-    if (isset($_SERVER)) { 
-        if($_SERVER['SERVER_ADDR']) {
-            $server_ip = $_SERVER['SERVER_ADDR']; 
-        } else { 
-            $server_ip = $_SERVER['LOCAL_ADDR']; 
-        } 
-    } else { 
-        $server_ip = getenv('SERVER_ADDR');
-    } 
-    return $server_ip; 
 }
 
 // 创建短网址key
