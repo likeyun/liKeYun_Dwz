@@ -23,6 +23,18 @@ RewriteEngine On
 RewriteRule ^(\w+)$ index.php?id=$1
 ```
 
+# 快捷创建页面配置
+为了方便他人使用或者自己的使用，我们提供了快捷创建页面，快捷创建页面我们设置了默认配置，如需自己配置，可以前往/index/chuangjian.php进行配置，配置项如下，具体的参数代表什么意思，请阅读开发文档。<br/>
+```
+$dwz_title = '快捷创建';
+$dwz_reditype = '1';
+$dwz_type = '1';
+$dwz_keynum = '5';
+$dwz_url = trim($_REQUEST["dwz_url"]);
+$api_key = 'kuaijie';
+$dwz_yxq = 'ever';
+```
+
 # 框架/语言
 前端框架：Bootstrap+jQuery<br/>
 后端框架：原生php+mySQL<br/>
