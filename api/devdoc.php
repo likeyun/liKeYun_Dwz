@@ -116,7 +116,7 @@
 			</table>
 
 			<p style="width: 95%;margin:10px auto;color: #333;font-size: 15px;">
-				请求示例 ：<?php echo dirname(dirname($url)).'/creat/?dwz_title=标题&dwz_reditype=1&dwz_yxq=ever&dwz_type=1&dwz_keynum=4&api_key=KpuFcxl9rd&dwz_url=http://www.baidu.com'; ?>
+				请求示例 ：<?php echo dirname(dirname($url)).'/api/creat.php?dwz_title=标题&dwz_reditype=1&dwz_yxq=ever&dwz_type=1&dwz_keynum=4&api_key=KpuFcxl9rd&dwz_url=http://www.baidu.com'; ?>
 			</p>
 		</div>
 	</div>
