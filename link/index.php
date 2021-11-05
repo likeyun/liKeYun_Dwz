@@ -267,7 +267,6 @@ if(isset($_SESSION["lkydwz.admin"])){
 			  <option value="6">6位随机数</option>
 			</select>
 			<input type="url" name="dwz_url" class="inputstyle" placeholder="请粘贴长链接">
-			<input type="hidden" name="api_key" value="local">
 	      </form>
 
 	      <!-- 提示框 -->
