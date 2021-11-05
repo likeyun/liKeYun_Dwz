@@ -7,8 +7,18 @@
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
   <script src="../js/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
   <link rel="shortcut icon" href="../images/fvicon.png" type="image/x-icon"/>
+  <style>
+      input:-webkit-autofill,
+      textarea:-webkit-autofill,
+      select:-webkit-autofill {
+          -webkit-box-shadow: 0 0 0 1000px white inset;
+      }
+      input[type=text]:focus, input[type=password]:focus, textarea:focus {
+          -webkit-box-shadow: 0 0 0 1000px white inset;
+      }
+  </style>
 </head>
 <body>
 	<div class="top">
