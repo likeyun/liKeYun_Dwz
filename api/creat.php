@@ -106,7 +106,7 @@ if ($res_apikey_ip->num_rows > 0) {
 	if(get_server_ip() !== $api_ip && $api_ip !== "不限"){
 		$result = array(
 			"code" => "104",
-			"msg" => "服务器IP不在白名单中"
+			"msg" => "服务器IP不在白名单中，当前服务器IP地址：".get_server_ip()
 		);
 		echo json_encode($result,JSON_UNESCAPED_UNICODE);
 		exit;
