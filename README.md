@@ -70,7 +70,7 @@ $dwz_yxq = 'ever';
 <img src="https://camo.githubusercontent.com/5fae9333ccce7aaf5dc8edd3bbbcf925a08c4d43d85a904e60073b167ef0043f/68747470733a2f2f702e7073746174702e636f6d2f6f726967696e2f7067632d696d6167652f6334663164366237353332343435646562643062656463383862623731643166" width="300"/>
 
 # 安装支持与交流
-遇到问题可以加入开发者交流群：http://pic.iask.cn/fimg/805445297649.jpg <br/>
+遇到问题可以加入开发者交流群：http://inews.gtimg.com/newsapp_bt/0/14446103724/641  <br/>
 如需加入作者的交流群，请加微信：sansure2016 备注进群。<br/>
 里客云开源工具交流1群（已满500人）<br/>
 里客云开源工具交流2群（已满500人）<br/>
