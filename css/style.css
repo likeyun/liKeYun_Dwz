@@ -15,6 +15,9 @@ input:-webkit-autofill,
  input[type=text]:focus, input[type=password]:focus, textarea:focus {
       -webkit-box-shadow: 0 0 0 1000px white inset; 
 }
+.modal-footer button{
+    margin: 0 auto;
+}
 
 #instantclick-bar{
 	display: none;
@@ -578,17 +581,16 @@ input:-webkit-autofill,
   margin-right: 0;
 }
 
-/*ÌáÊ¾¿ò*/
+/*反馈提示*/
 #result{
 	width: 90%;
-	margin:10px auto;
-	/*background: #ccc;*/
+	margin:10px auto 20px;
 }
 
 #result .success{
 	width: 100%;
 	height: 50px;
-	background: rgba(52,100,224,0.2);
+	background: rgba(31,73,182,0.1);
 	border-radius: 5px;
 	line-height: 50px;
 	color: #1f49b6;
@@ -599,7 +601,7 @@ input:-webkit-autofill,
 #result .error{
 	width: 100%;
 	height: 50px;
-	background: rgba(237,25,65,0.2);
+	background: rgba(191,0,36,0.1);
 	border-radius: 5px;
 	line-height: 50px;
 	color: #bf0024;
