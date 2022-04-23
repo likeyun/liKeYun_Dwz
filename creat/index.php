@@ -20,6 +20,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 	$dwz_type = sqlfzr(trim($_REQUEST["dwz_type"]));
 	$dwz_keynum = sqlfzr(trim($_REQUEST["dwz_keynum"]));
 	$dwz_url = trim($_REQUEST["dwz_url"]);
+	$dwz_zdykey = trim($_REQUEST["dwz_zdykey"]);
 
 	// 获取有效期的参数
 	if ($_REQUEST["dwz_yxq"] == 'cus') {
@@ -36,7 +37,6 @@ if(isset($_SESSION["lkydwz.admin"])){
 
 	// 创建短网址id和Key
 	$dwz_id = rand(10000,99999);
-	$dwz_key = CreatKey($dwz_keynum);
 
 	// 验证入口域名
 	$sql_rkym = "SELECT * FROM dwz_ym WHERE ym_type = '1'";
@@ -95,22 +95,43 @@ if(isset($_SESSION["lkydwz.admin"])){
 			"code" => "102",
 			"msg" => "请输入有效期"
 		);
+	}else if(empty($dwz_zdykey) && $dwz_keynum == 'zdykey'){
+		$result = array(
+			"code" => "106",
+			"msg" => "请设置自定义参数"
+		);
 	}else if(empty($dwz_url)){
 		$result = array(
 			"code" => "103",
 			"msg" => "请粘贴长链接"
 		);
 	}else{
-		
-		// 插入数据库
-		$sql_creat_dwz = "INSERT INTO dwz_list (dwz_id,dwz_key,dwz_url,dwz_title,dwz_type,dwz_yxq,dwz_reditype,dwz_rkym,dwz_ffym) VALUES ('$dwz_id','$dwz_key','$dwz_url','$dwz_title','$dwz_type','$dwz_yxq_date','$dwz_reditype','$dwz_rkym','$dwz_ffym')";
+	    
+	    // 过滤自定义key
+        if (preg_match("/[\x7f-\xff]/", $dwz_zdykey)) { 
+            $result = array(
+    			"code" => "107",
+    			"msg" => "自定义参数不能包含中文"
+    		);
+    		echo json_encode($result,JSON_UNESCAPED_UNICODE);
+    		exit;
+        }
+	    
+	    // 如果选择自定义，那么需要将随机参数替换为自定义参数
+	    if($dwz_keynum == 'zdykey'){
+	        // 插入数据库
+		    $sql_creat_dwz = "INSERT INTO dwz_list (dwz_id,dwz_key,dwz_url,dwz_title,dwz_type,dwz_yxq,dwz_reditype,dwz_rkym,dwz_ffym) VALUES ('$dwz_id','$dwz_zdykey','$dwz_url','$dwz_title','$dwz_type','$dwz_yxq_date','$dwz_reditype','$dwz_rkym','$dwz_ffym')";
+	    }else{
+	        $dwz_key = CreatKey($dwz_keynum);
+	        // 插入数据库
+		    $sql_creat_dwz = "INSERT INTO dwz_list (dwz_id,dwz_key,dwz_url,dwz_title,dwz_type,dwz_yxq,dwz_reditype,dwz_rkym,dwz_ffym) VALUES ('$dwz_id','$dwz_key','$dwz_url','$dwz_title','$dwz_type','$dwz_yxq_date','$dwz_reditype','$dwz_rkym','$dwz_ffym')";
+	    }
 
 		// 判断创建结果
 		if ($conn->query($sql_creat_dwz) === TRUE) {
 			$result = array(
 				"code" => "100",
-				"msg" => "创建成功",
-				"url" => $dwz_rkym.'/'.$dwz_key
+				"msg" => "创建成功"
 			);
 			
 		}else{
