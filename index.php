@@ -27,7 +27,7 @@
 	</style>
 </head>
 <?php
-header("Content-Type:text/html;charset=utf-8");
+header('HTTP/1.1 302');
 
 // 数据库配置
 include './dbconfig/db.php';
@@ -118,14 +118,14 @@ if (trim(empty($key))) {
 	        	// 判断设备限制
 	        	if ($dwz_type == '1') {
 	        		echo '<title>正在跳转</title>';
-	        		echo '<script>location.href="'.$dwz_url.'";</script>';
+	        		header('Location: '.$dwz_url);
 	        	}else if($dwz_type == '2') {
 					if(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') === false) {
 						echo '<title>正在跳转</title>';
 						echo '<title>温馨提示</title>';
 	    				echo "<br/><br/><br/><br/><br/><img src='./images/warning.png' style='width:120px;height:120px;display:block;margin:20px auto;' /><p style='text-align:center;color:#666;'>该页面只能在微信打开</p>";
 					}else{
-						echo '<script>location.href="'.$dwz_url.'";</script>';
+						header('Location: '.$dwz_url);
 					}
 	        	}else if($dwz_type == '3') {
 	        		if(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') === false) {
@@ -137,7 +137,7 @@ if (trim(empty($key))) {
 						exit;
 					}
 						echo '<title>正在跳转</title>';
-						echo '<script>location.href="'.$dwz_url.'";</script>';
+						header('Location: '.$dwz_url);
 					}else{
 						echo '<title>温馨提示</title>';
 						$agent_iphone_android = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -156,7 +156,7 @@ if (trim(empty($key))) {
         			$is_pc = (strpos($agent_pc, 'windows nt')) ? true : false;
         			if($is_pc){
         				echo '<title>正在跳转</title>';
-        				echo '<script>location.href="'.$dwz_url.'";</script>';
+        				header('Location: '.$dwz_url);
         			}else{
         				echo '<title>温馨提示</title>';
 	    				echo "<br/><br/><br/><br/><br/><img src='./images/warning.png' style='width:120px;height:120px;display:block;margin:20px auto;' /><p style='text-align:center;color:#666;'>该页面只能在电脑浏览器打开</p>";
@@ -166,7 +166,7 @@ if (trim(empty($key))) {
         			$is_android = (strpos($agent_android, 'android')) ? true : false;
         			if($is_android){
         				echo '<title>正在跳转</title>';
-        				echo '<script>location.href="'.$dwz_url.'";</script>';
+        				header('Location: '.$dwz_url);
         			}else{
         				echo '<title>温馨提示</title>';
 	    				echo "<br/><br/><br/><br/><br/><img src='./images/warning.png' style='width:120px;height:120px;display:block;margin:20px auto;' /><p style='text-align:center;color:#666;'>该页面只能在Android设备打开</p>";
@@ -176,7 +176,7 @@ if (trim(empty($key))) {
         			$is_iphone = (strpos($agent_iphone, 'iphone')) ? true : false;
         			if($is_iphone){
         				echo '<title>正在跳转</title>';
-        				echo '<script>location.href="'.$dwz_url.'";</script>';
+        				header('Location: '.$dwz_url);
         			}else{
         				echo '<title>温馨提示</title>';
 	    				echo "<br/><br/><br/><br/><br/><img src='./images/warning.png' style='width:120px;height:120px;display:block;margin:20px auto;' /><p style='text-align:center;color:#666;'>该页面只能在iPhone打开</p>";
