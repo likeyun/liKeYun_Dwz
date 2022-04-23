@@ -104,8 +104,8 @@ if(isset($_SESSION["lkydwz.admin"])){
 			<div class="dhlist">
 				<ul>
 					<a href="./?lang=Zh_CN&token='.md5(rand(10000,99999)).'"><li>短链接列表</li></a>
-					<li style="background:none;color:#333;" data-toggle="modal" data-target="#Search_dlj">查询短链接</li>
 					<li style="background:none;color:#333;" data-toggle="modal" data-target="#Creat_dlj">创建短链接</li>
+					<li style="background:none;color:#333;" data-toggle="modal" data-target="#Search_dlj">查询短链接</li>
 				</ul>
 			</div>
 			<div class="datalist">';
@@ -261,22 +261,24 @@ if(isset($_SESSION["lkydwz.admin"])){
 			  <option value="5">只能Android设备打开</option>
 			  <option value="6">只能iOS设备打开</option>
 			</select>
-			<select name="dwz_keynum" class="selectstyle">
+			<select name="dwz_keynum" class="selectstyle" id="zdykey_select">
 			  <option value ="4">4位随机数</option>
 			  <option value="5">5位随机数</option>
 			  <option value="6">6位随机数</option>
+			  <option value="zdykey">自定义参数</option>
 			</select>
+			<input type="text" name="dwz_zdykey" class="inputstyle" style="display: none;" id="zdykey" placeholder="设置自定义参数">
 			<input type="url" name="dwz_url" class="inputstyle" placeholder="请粘贴长链接">
 	      </form>
-
-	      <!-- 提示框 -->
-	      <div id="result"></div>
 	    </div>
 
 	    <!-- 模态框底部 -->
 	    <div class="modal-footer">
 	      <button type="button" class="btn btn-secondary" onclick="creatdwz();">立即创建</button>
 	    </div>
+	    
+	    <!-- 提示框 -->
+	    <div id="result"></div>
 
 	  </div>
 	</div>

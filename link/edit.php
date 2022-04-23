@@ -45,6 +45,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 			$dwz_reditype = $row_dwzinfo['dwz_reditype'];
 			$dwz_yxq = $row_dwzinfo['dwz_yxq'];
 			$dwz_status = $row_dwzinfo['dwz_status'];
+			$dwz_key = $row_dwzinfo['dwz_key'];
 		}
 	}else{
 		echo "短网址不存在";
@@ -221,7 +222,9 @@ if(isset($_SESSION["lkydwz.admin"])){
 						<option value ="1">不限制打开方式</option>
 						</select>';
 					}
-					echo '<input type="url" name="dwz_url" class="inputstyle" value="'.$dwz_url.'" placeholder="请粘贴长链接">
+					echo '
+					<input type="text" name="dwz_key" class="inputstyle" value="'.$dwz_key.'" placeholder="请设置自定义参数">
+					<input type="url" name="dwz_url" class="inputstyle" value="'.$dwz_url.'" placeholder="请粘贴长链接">
 					<input type="hidden" name="dwz_id" value="'.$dwz_id.'">
 					<input type="hidden" name="dwz_token" value="'.md5(time()).'">
 					<button type="button" class="btn btn-update" onclick="updatedwz();">立即更新</button>

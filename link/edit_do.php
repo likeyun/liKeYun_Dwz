@@ -33,6 +33,7 @@ if(isset($_SESSION["lkydwz.admin"])){
 	$dwz_reditype = sqlfzr(trim($_POST["dwz_reditype"]));
 	$dwz_yxq = sqlfzr(trim($_POST["dwz_yxq"]));
 	$dwz_status = sqlfzr(trim($_POST["dwz_status"]));
+	$dwz_key = sqlfzr(trim($_POST["dwz_key"]));
 	
 	// 获取有效期
 	if ($_REQUEST["dwz_yxq"] == 'cus') {
@@ -77,6 +78,11 @@ if(isset($_SESSION["lkydwz.admin"])){
 			"code" => "101",
 			"msg" => "请输入标题"
 		);
+	}else if(empty($dwz_key)){
+		$result = array(
+			"code" => "103",
+			"msg" => "请设置自定义参数"
+		);
 	}else if(empty($dwz_url)){
 		$result = array(
 			"code" => "102",
@@ -91,9 +97,19 @@ if(isset($_SESSION["lkydwz.admin"])){
 
 		// 设置字符编码为utf-8
 		mysqli_query($conn, "SET NAMES UTF-8");
+		
+		// 过滤自定义key
+        if (preg_match("/[\x7f-\xff]/", $dwz_key)) { 
+            $result = array(
+    			"code" => "107",
+    			"msg" => "自定义参数不能包含中文"
+    		);
+    		echo json_encode($result,JSON_UNESCAPED_UNICODE);
+    		exit;
+        }
 
 		// 更新数据库
-		mysqli_query($conn,"UPDATE dwz_list SET dwz_title='$dwz_title',dwz_url='$dwz_url',dwz_type='$dwz_type',dwz_reditype='$dwz_reditype',dwz_yxq='$dwz_yxq_date',dwz_status='$dwz_status',dwz_ffym='$dwz_ffym' WHERE dwz_id=".$dwz_id);
+		mysqli_query($conn,"UPDATE dwz_list SET dwz_title='$dwz_title',dwz_key='$dwz_key',dwz_url='$dwz_url',dwz_type='$dwz_type',dwz_reditype='$dwz_reditype',dwz_yxq='$dwz_yxq_date',dwz_status='$dwz_status',dwz_ffym='$dwz_ffym' WHERE dwz_id=".$dwz_id);
 
 		$result = array(
 			"code" => "100",

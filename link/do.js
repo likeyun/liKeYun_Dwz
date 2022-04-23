@@ -12,13 +12,23 @@ $(document).ready(function(){
     })
 });
 
-// 监听
+// 监听过期时间
 $("#gqsj_select").bind('input propertychange',function(e){
   var gqsj_select = $(this).val();
   if (gqsj_select == 'cus') {
     $("#gqsj").css("display","block");
   }else{
     $("#gqsj").css("display","none");
+  }
+})
+
+// 监听自定义参数
+$("#zdykey_select").bind('input propertychange',function(e){
+  var zdykey_select = $(this).val();
+  if (zdykey_select == 'zdykey') {
+    $("#zdykey").css("display","block");
+  }else{
+    $("#zdykey").css("display","none");
   }
 })
 
