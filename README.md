@@ -1,3 +1,15 @@
+# 项目停止维护
+该项目停止维护，已被集成至我另一个项目，请移步至【引流宝】项目
+https://github.com/likeyun/liKeYun_Huoma
+
+# 项目停止维护
+该项目停止维护，已被集成至我另一个项目，请移步至【引流宝】项目
+https://github.com/likeyun/liKeYun_Huoma
+
+# 项目停止维护
+该项目停止维护，已被集成至我另一个项目，请移步至【引流宝】项目
+https://github.com/likeyun/liKeYun_Huoma
+
 # liKeYun_Dwz
 这是一套开源、免费、自建的短链接生成程序，可以通过本套程序快速自建属于自己的短链接生成平台，有丰富的功能和便捷的API，可以帮助你进行各项推广任务！
 
